@@ -53,6 +53,10 @@ pytest
 
 Если `X-User-Id` отсутствует, сервис вернет `401`. Если не хватает права — `403`.
 
+`X-User-Id` должен быть техническим идентификатором вроде `usr_1` или `user_123`.
+Не передавайте туда email, токены и другие чувствительные данные: значение возвращается в
+`createdBy` / `decidedBy` и сохраняется в audit trail.
+
 ## Идемпотентность создания
 
 Для `POST /api/v1/workspaces/{workspace_id}/approval-requests` можно передать
@@ -105,4 +109,3 @@ curl -X POST http://localhost:8000/api/v1/workspaces/ws_1/approval-requests/{req
   -H "X-User-Actions: approval:cancel" \
   -d '{"reason": "Draft was removed"}'
 ```
-
